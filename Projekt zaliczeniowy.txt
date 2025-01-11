@@ -1,0 +1,42 @@
+Projekt zaliczeniowy
+
+- rozpoznanie struktury bazy źródłowej
+    tabele, kolumny, typy kolumn, klucze główne i obce)
+    diagram bazy danych
+- zapoznanie się z danymi
+    brakujące wartości, słowniki, tabele używające słowników
+    identyfikacja potencjalnych miar i wymiarów
+- analiza wymagań
+- projekt i utworzenie struktury bazy analitycznej
+    * brak uprawnień do modyfikowania bazy źródłowej
+    * konieczne założenie bazy analitycznej (SQL Server)
+- projekt, dokumentacja i utworzenie procedur zasilania danych
+- utworzenie modelu semantycznego
+    * relacje (kardynalność, aktywność)
+    * tabele kalendarza dla każdej istotnej daty w modelu
+    * miary
+- załadowanie danych do modelu semantycznego z bazy analitycznej
+    * Power Query
+- przykłady wizualizacji
+
+-----
+Produkty projektu:
+- dokumentacja (projekt modelu analitycznego i zasilania) - DOCX
+- relacyjna baza analityczna (SQL Server) - skrypty SQL
+- procedury zasilania bazy analitycznej (ETL) - SQL
+- model semantyczny (Power BI) - PBIX
+- przykładowe raporty (Power BI) - PBIX
+
+-----
+Co będzie oceniane:
+- kompletność projektu
+- prawidłowość działania
+- budowa skryptu (wykorzystanie procedur, formatowanie, komentarze)
+- stopień wykorzystania danych źródłowych
+- konstrukcja modelu semantycznego
+- formuły DAX (miary, tabela kalendarza)
+- elegancja modelu (formaty dat i liczb, nazwy kolumn, tabel, miar,
+     ukrycie kluczy, kolumn pod miary)
+
+
+
