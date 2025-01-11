@@ -1,19 +1,23 @@
 use BikeStores;
 SELECT *  FROM sales.customers;
-
 SELECT *  FROM sales.orders;
-
 SELECT *  FROM sales.order_items;
-
 SELECT *  FROM sales.staffs;
-
 SELECT *  FROM sales.stores;
-
 SELECT *  FROM production.categories;
-
 SELECT *  FROM production.products;
-
 SELECT *  FROM production.brands;
+
+
+
+Aby wyœwietliæ wszystkie tabele w bazie danych w Microsoft SQL Server, mo¿esz u¿yæ zapytania SQL korzystaj¹cego z widoku systemowego INFORMATION_SCHEMA.TABLES lub sys.tables. Poni¿ej znajduj¹ siê dwa sposoby:
+
+
+SELECT TABLE_SCHEMA AS SchemaName,
+       TABLE_NAME AS TableName,
+       TABLE_TYPE AS TableType
+FROM INFORMATION_SCHEMA.TABLES
+ORDER BY SchemaName, TableName;
 
 
 
@@ -64,6 +68,7 @@ Co robi to zapytanie:
    - Po ID pracownika rosn¹co,
    - Po liczbie sprzedanych produktów malej¹co.
 */
+use BikeStores;
 SELECT 
     s.staff_id,  -- ID pracownika
     s.first_name + ' ' + s.last_name AS employee_name,  -- Po³¹czone imiê i nazwisko pracownika
@@ -231,24 +236,3 @@ SELECT
 FROM CategorySales
 WHERE rank = 1 -- Wyœwietlenie tylko najlepiej sprzedaj¹cych siê kategorii w ka¿dym sklepie
 ORDER BY store_id;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
