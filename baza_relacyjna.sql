@@ -10,8 +10,7 @@ SELECT *  FROM production.brands;
 
 
 
-Aby wyœwietliæ wszystkie tabele w bazie danych w Microsoft SQL Server, mo¿esz u¿yæ zapytania SQL korzystaj¹cego z widoku systemowego INFORMATION_SCHEMA.TABLES lub sys.tables. Poni¿ej znajduj¹ siê dwa sposoby:
-
+-- Aby wyœwietliæ wszystkie tabele w bazie danych w Microsoft SQL Server
 
 SELECT TABLE_SCHEMA AS SchemaName,
        TABLE_NAME AS TableName,
@@ -19,6 +18,10 @@ SELECT TABLE_SCHEMA AS SchemaName,
 FROM INFORMATION_SCHEMA.TABLES
 ORDER BY SchemaName, TableName;
 
+
+
+-- TEST PORÓWNAWCZY WYNIKÓW Z BAZY RELACYJNEJ I ANALITYCZNEJ
+-- TEST PORÓWNAWCZY WYNIKÓW Z BAZY RELACYJNEJ I ANALITYCZNEJ
 
 
 /* 1.

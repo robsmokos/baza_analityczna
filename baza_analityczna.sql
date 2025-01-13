@@ -19,6 +19,12 @@ SELECT DB_NAME() AS ActiveDatabase;
 
 
 
+
+--PROCES ETL
+--PROCES ETL
+--PROCES ETL
+
+
 -- 1. Tworzenie tabel wymiarów-- 
 -- Tabela Dim_Stores
 CREATE TABLE Dim_Stores (
@@ -108,6 +114,28 @@ CREATE TABLE Fact_Sales (
 
 
 
+--Tabela Fact_Sales
+CREATE TABLE Fact_Sales (
+    sale_id INT PRIMARY KEY IDENTITY(1,1),
+    store_id INT,
+    product_id INT,
+    category_id INT,
+    staff_id INT,
+    customer_id INT,
+    date_id INT,
+    quantity INT,
+    total_revenue DECIMAL(12,2),
+    discount DECIMAL(10,2),
+    FOREIGN KEY (store_id) REFERENCES Dim_Stores(store_id),
+    FOREIGN KEY (product_id) REFERENCES Dim_Products(product_id),
+    FOREIGN KEY (category_id) REFERENCES Dim_Categories(category_id),
+    FOREIGN KEY (staff_id) REFERENCES Dim_Staffs(staff_id),
+    FOREIGN KEY (customer_id) REFERENCES Dim_Customers(customer_id),
+    FOREIGN KEY (date_id) REFERENCES Dim_Time(date_id)
+);
+
+
+
 
 
 DELETE FROM BikeStores_Analytics.dbo.Dim_Staffs;
@@ -119,9 +147,10 @@ DELETE FROM BikeStores_Analytics.dbo.Dim_Stores;
 
 
 
+-- LOAD
+-- LOAD
 
 -- 1. Zasilanie Dim_Stores
-
 
 INSERT INTO BikeStores_Analytics.dbo.Dim_Stores (
     store_id, store_name, store_phone, store_email, store_street, store_city, store_state, store_zipcode
@@ -182,26 +211,6 @@ FROM BikeStores.sales.orders AS o;
 
 
 
-/*--Tabela Fact_Sales
-CREATE TABLE Fact_Sales (
-    sale_id INT PRIMARY KEY IDENTITY(1,1),
-    store_id INT,
-    product_id INT,
-    category_id INT,
-    staff_id INT,
-    customer_id INT,
-    date_id INT,
-    quantity INT,
-    total_revenue DECIMAL(12,2),
-    discount DECIMAL(10,2),
-    FOREIGN KEY (store_id) REFERENCES Dim_Stores(store_id),
-    FOREIGN KEY (product_id) REFERENCES Dim_Products(product_id),
-    FOREIGN KEY (category_id) REFERENCES Dim_Categories(category_id),
-    FOREIGN KEY (staff_id) REFERENCES Dim_Staffs(staff_id),
-    FOREIGN KEY (customer_id) REFERENCES Dim_Customers(customer_id),
-    FOREIGN KEY (date_id) REFERENCES Dim_Time(date_id)
-);
-*/
 
 
 
@@ -230,8 +239,7 @@ GROUP BY
 
 
 
-
-	-- sprawdzenie zawartoœci baz Analityzcnej
+-- sprawdzenie zawartoœci baz Analityzcnej
 
 USE BikeStores_Analytics;
 
@@ -246,21 +254,19 @@ SELECT * FROM Dim_Customers;
 
 
 
-
+--- OPTYMALIZACJA BAZY ANALITYCZNEJ
+--- OPTYMALIZACJA BAZY ANALITYCZNEJ
 
 CREATE INDEX idx_fact_sales_product_id ON Fact_Sales (product_id);
 CREATE INDEX idx_fact_sales_date_id ON Fact_Sales (date_id);
 
 
 
-
-
-
-
-
-
-
 USE BikeStores_Analytics;
+
+-- TEST PORÓWNAWCZY WYNIKÓW Z BAZY RELACYJNEJ I ANALITYCZNEJ
+-- TEST PORÓWNAWCZY WYNIKÓW Z BAZY RELACYJNEJ I ANALITYCZNEJ
+
 
 /* 1.BazaAnalityczna*/
 
@@ -407,3 +413,17 @@ SELECT TABLE_SCHEMA AS SchemaName,
        TABLE_TYPE AS TableType
 FROM INFORMATION_SCHEMA.TABLES
 ORDER BY SchemaName, TableName;
+
+
+
+
+
+
+--BACKUP--
+BACKUP DATABASE [BikeStores_Analytics]
+TO DISK = 'C:\DATA\ROB\baza_analityczna\BikeStores_Analytics_New.bak'
+WITH FORMAT, INIT,
+     NAME = 'BikeStores_Analytics_New-Full Database Backup',
+     SKIP, REWIND, NOUNLOAD, STATS = 10;
+GO
+
