@@ -114,29 +114,6 @@ CREATE TABLE Fact_Sales (
 
 
 
---Tabela Fact_Sales
-CREATE TABLE Fact_Sales (
-    sale_id INT PRIMARY KEY IDENTITY(1,1),
-    store_id INT,
-    product_id INT,
-    category_id INT,
-    staff_id INT,
-    customer_id INT,
-    date_id INT,
-    quantity INT,
-    total_revenue DECIMAL(12,2),
-    discount DECIMAL(10,2),
-    FOREIGN KEY (store_id) REFERENCES Dim_Stores(store_id),
-    FOREIGN KEY (product_id) REFERENCES Dim_Products(product_id),
-    FOREIGN KEY (category_id) REFERENCES Dim_Categories(category_id),
-    FOREIGN KEY (staff_id) REFERENCES Dim_Staffs(staff_id),
-    FOREIGN KEY (customer_id) REFERENCES Dim_Customers(customer_id),
-    FOREIGN KEY (date_id) REFERENCES Dim_Time(date_id)
-);
-
-
-
-
 
 DELETE FROM BikeStores_Analytics.dbo.Dim_Staffs;
 DELETE FROM BikeStores_Analytics.dbo.Dim_Customers;
@@ -421,9 +398,8 @@ ORDER BY SchemaName, TableName;
 
 --BACKUP--
 BACKUP DATABASE [BikeStores_Analytics]
-TO DISK = 'C:\DATA\ROB\baza_analityczna\BikeStores_Analytics_New.bak'
+TO DISK = 'C:\DATA\ROB\baza_analityczna\BikeStores_Analytics.bak'
 WITH FORMAT, INIT,
      NAME = 'BikeStores_Analytics_New-Full Database Backup',
      SKIP, REWIND, NOUNLOAD, STATS = 10;
 GO
-
